@@ -1,0 +1,206 @@
+:root {
+  --bg-gradient-light: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+  --bg-gradient-dark: linear-gradient(135deg, #0f0c29 0%, #302b63 100%);
+  --form-bg-light: rgba(255, 255, 255, 0.15);
+  --form-bg-dark: rgba(0, 0, 0, 0.4);
+  --input-bg-light: rgba(255, 255, 255, 0.95);
+  --input-bg-dark: rgba(20, 20, 20, 0.9);
+  --text-light: #2c3e50;
+  --text-dark: #ffffff;
+  --input-text-light: #2c3e50;
+  --input-text-dark: #ffffff;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] {
+  --bg-gradient: var(--bg-gradient-dark);
+  --form-bg: var(--form-bg-dark);
+  --input-bg: var(--input-bg-dark);
+  --text-color: var(--text-dark);
+  --shadow-color: var(--shadow-dark);
+  --input-text-color: var(--input-text-dark);
+}
+
+[data-theme="light"] {
+  --bg-gradient: var(--bg-gradient-light);
+  --form-bg: var(--form-bg-light);
+  --input-bg: var(--input-bg-light);
+  --text-color: var(--text-light);
+  --shadow-color: var(--shadow-light);
+  --input-text-color: var(--input-text-light);
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  min-width: 500px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  background: var(--form-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-title {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.result-group {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+  background: var(--input-bg);
+  color: var(--input-text-color);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.result-input {
+  flex: 1;
+  background: var(--input-bg);
+  color: var(--text-color);
+  cursor: default;
+}
+
+button {
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(100, 108, 255, 0.3);
+  box-sizing: border-box;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 108, 255, 0.5);
+  background: linear-gradient(45deg, #FF8E53, #FF6B6B);
+}
+
+.copy-button {
+  width: auto;
+  padding: 0.8rem 1.2rem;
+  margin: 0;
+  background: linear-gradient(45deg, #4ECDC4, #2ECC71);
+  min-width: 80px;
+}
+
+.copy-button:hover {
+  background: linear-gradient(45deg, #2ECC71, #4ECDC4);
+}
+
+.action-button {
+  flex: 1;
+  margin: 0;
+  min-width: 80px;
+}
+
+.visit-button {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+}
+
+.visit-button:hover {
+  background: linear-gradient(45deg, #2980b9, #3498db);
+}
+
+.new-url-button {
+  background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+}
+
+.new-url-button:hover {
+  background: linear-gradient(45deg, #FF8E53, #FF6B6B);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  padding: 2rem;
+  transition: background 0.3s ease;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.theme-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--form-bg);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  transform: rotate(360deg);
+}
