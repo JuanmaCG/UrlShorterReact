@@ -1,0 +1,38 @@
+.qrButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem;
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    aspect-ratio: 1;
+    min-width: unset !important;
+    width: 45px;
+}
+
+.qrButton:hover {
+    background: linear-gradient(45deg, #8e44ad, #9b59b6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(142, 68, 173, 0.4);
+}
+
+.qrIcon {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .qrButton {
+        width: 100%;
+        aspect-ratio: unset;
+    }
+
+    .qrIcon {
+        width: 20px;
+        height: 20px;
+    }
+}
