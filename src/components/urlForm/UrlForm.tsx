@@ -1,29 +1,46 @@
 import { useState } from 'react';
 import { shortenUrl } from '../../services/urlService';
-import styles from './UrlForm.module.css';
+import { InputError } from '../inputError/InputError';
 import { UrlResult } from '../urlResult/UrlResult';
+import { LoadingSpinner } from '../loadingSpinner/LoadingSpinner';
+import styles from './UrlForm.module.css';
 
 export const UrlForm = () => {
   const [url, setUrl] = useState('');
   const [alias, setAlias] = useState('');
   const [shortedUrl, setShortedUrl] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const resetForm = () => {
     setUrl('');
     setAlias('');
     setShortedUrl('');
     setIsSubmitted(false);
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+    setIsLoading(true);
+    
     try {
       const result = await shortenUrl(url, alias);
-      setShortedUrl(result);
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error('Error:', error);
+      
+      if (result.error) {
+        console.log(result.error);
+        setError(result.error.message);
+        return;
+      }
+
+      if (result.data) {
+        setShortedUrl(result.data);
+        setIsSubmitted(true);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,29 +55,39 @@ export const UrlForm = () => {
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Enter URL"
             required
+            className={error ? styles.inputError : ''}
           />
         </div>
-        {!isSubmitted ? (
+        {!isSubmitted && (
           <div className={styles.formGroup}>
             <input
               type="text"
               value={alias}
               onChange={(e) => setAlias(e.target.value)}
               placeholder="Enter alias (optional)"
+              className={error ? styles.inputError : ''}
             />
           </div>
-        ) : (
-          <UrlResult shortedUrl={shortedUrl} />
         )}
-        {!isSubmitted ? (
-          <button type="submit">Shorten URL</button>
+        {error && <InputError message={error} />}
+        {isSubmitted ? (
+          <>
+            <UrlResult shortedUrl={shortedUrl} />
+            <button 
+              type="button" 
+              className={styles.newUrlButton}
+              onClick={resetForm}
+            >
+              Shorten Another URL
+            </button>
+          </>
         ) : (
           <button 
-            type="button" 
-            className={styles.newUrlButton}
-            onClick={resetForm}
+            type="submit" 
+            disabled={isLoading}
+            className={isLoading ? styles.loading : ''}
           >
-            Shorten Another URL
+            {isLoading ? <LoadingSpinner size="small" /> : 'Shorten URL'}
           </button>
         )}
       </form>

@@ -4,11 +4,10 @@
   --form-bg-light: rgba(255, 255, 255, 0.15);
   --form-bg-dark: rgba(0, 0, 0, 0.4);
   --input-bg-light: rgba(255, 255, 255, 0.95);
-  --input-bg-dark: rgba(20, 20, 20, 0.9);
   --text-light: #2c3e50;
   --text-dark: #ffffff;
+  --error-text-light: #ff0000;
   --input-text-light: #2c3e50;
-  --input-text-dark: #ffffff;
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-dark: rgba(0, 0, 0, 0.5);
   --accent-color: #FF6B6B;
@@ -21,10 +20,11 @@
 [data-theme="dark"] {
   --bg-gradient: var(--bg-gradient-dark);
   --form-bg: var(--form-bg-dark);
-  --input-bg: var(--input-bg-dark);
+  --input-bg: var(--input-bg-light);
   --text-color: var(--text-dark);
   --shadow-color: var(--shadow-dark);
   --input-text-color: var(--input-text-dark);
+  --error-text: var(--accent-color);
 }
 
 [data-theme="light"] {
@@ -34,6 +34,7 @@
   --text-color: var(--text-light);
   --shadow-color: var(--shadow-light);
   --input-text-color: var(--input-text-light);
+  --error-text: var(--error-text-light);
 }
 
 #root {

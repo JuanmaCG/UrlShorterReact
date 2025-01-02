@@ -6,17 +6,23 @@ interface QrButtonProps {
 }
 
 export const QrButton = ({ url }: QrButtonProps) => {
+
+
   const handleGenerateQR = async () => {
-    try {
+    const response = await qrResponse(url);
+    
+    if (response.error) {
       
+      return;
+    }
+
+    if (response.data) {
       const link = document.createElement('a');
-      link.href = await qrResponse(url)
+      link.href = response.data;
       link.download = 'qr-code.png';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    } catch (error) {
-      console.error('Error generating QR:', error);
     }
   };
 

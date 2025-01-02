@@ -29,15 +29,6 @@
     margin-top: 1rem;
 }
 
-/* Remove or comment out the nth-child(2) styles since we're using the QrButton component's own styles */
-/* .actionButton:nth-child(2) {
-    background: linear-gradient(45deg, #9b59b6, #8e44ad);
-}
-
-.actionButton:nth-child(2):hover {
-    background: linear-gradient(45deg, #8e44ad, #9b59b6);
-} */
-
 .actionButton {
     flex: 1;
     padding: 0.8rem 1.2rem;

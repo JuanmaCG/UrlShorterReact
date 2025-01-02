@@ -9,10 +9,10 @@ export const UrlResult = ({ shortedUrl }: UrlResultProps) => {
     console.log(shortedUrl);
     const handleCopy = async () => {
         try {
-        await navigator.clipboard.writeText(shortedUrl);
+            await navigator.clipboard.writeText(shortedUrl);
         alert('URL copied to clipboard!');
         } catch (err) {
-        console.error('Failed to copy:', err);
+            console.error('Failed to copy:', err);
         }
     };
 
