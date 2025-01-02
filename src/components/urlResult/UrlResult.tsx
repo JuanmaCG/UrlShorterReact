@@ -6,7 +6,6 @@ interface UrlResultProps {
 }
 
 export const UrlResult = ({ shortedUrl }: UrlResultProps) => {
-    console.log(shortedUrl);
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(shortedUrl);

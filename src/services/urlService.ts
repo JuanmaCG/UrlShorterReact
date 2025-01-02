@@ -14,7 +14,6 @@ export const shortenUrl = async (longUrl: string, alias?: string) => {
     const data = await response.json();
     
     if (!response.ok) {
-      console.log(data)
       return {
         data: null,
         error: {

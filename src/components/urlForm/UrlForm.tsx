@@ -30,7 +30,6 @@ export const UrlForm = () => {
       const result = await shortenUrl(url, alias);
       
       if (result.error) {
-        console.log(result.error);
         setError(result.error.message);
         return;
       }
