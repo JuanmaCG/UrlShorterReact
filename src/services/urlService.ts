@@ -3,7 +3,7 @@ import { ShortenResponse } from "../types/shortenResponse";
 
 export const shortenUrl = async (longUrl: string, alias?: string) => {
   try {
-    const response = await fetch('http://localhost:3000/api/shorten/', {
+    const response = await fetch('https://urlshorter-kybx.onrender.com/api/shorten/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const shortenUrl = async (longUrl: string, alias?: string) => {
 
 export const qrResponse = async (url: string, token: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/shorten/${url}/qr`, {
+    const response = await fetch(`https://urlshorter-kybx.onrender.com/api/shorten/${url}/qr`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
