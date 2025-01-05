@@ -1,6 +1,9 @@
+import { ApiResult } from "../types/apiResult";
+import { ShortenResponse } from "../types/shortenResponse";
+
 export const shortenUrl = async (longUrl: string, alias?: string) => {
   try {
-    const response = await fetch('https://urlshorter-kybx.onrender.com/', {
+    const response = await fetch('http://localhost:3000/api/shorten/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,9 +27,9 @@ export const shortenUrl = async (longUrl: string, alias?: string) => {
     }
 
     return {
-      data: alias ? data.alias : data.shortedUrl,
+      data: {shortedUrl: data.shortedUrl, shortedCompleteUrl: data.shortedCompleteUrl, alias: data.alias, aliasCompleteUrl: data.aliasCompleteUrl, token: data.token} as ShortenResponse,
       error: null
-    };
+    } as ApiResult;
   } catch (error) {
     return {
       data: null,
@@ -38,12 +41,13 @@ export const shortenUrl = async (longUrl: string, alias?: string) => {
   }
 };
 
-export const qrResponse = async (url: string) => {
+export const qrResponse = async (url: string, token: string) => {
   try {
-    const response = await fetch('https://urlshorter-kybx.onrender.com/generateQr', {
+    const response = await fetch(`http://localhost:3000/api/shorten/${url}/qr`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ url })
     });

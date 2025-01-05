@@ -3,13 +3,14 @@ import styles from './QrButton.module.css';
 
 interface QrButtonProps {
   url: string;
+  token: string;
 }
 
-export const QrButton = ({ url }: QrButtonProps) => {
+export const QrButton = ({ url, token }: QrButtonProps) => {
 
 
   const handleGenerateQR = async () => {
-    const response = await qrResponse(url);
+    const response = await qrResponse(url, token);
     
     if (response.error) {
       

@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            -   name: Set up Node.js
+                uses: actions/setup-node@v3
+                with:
+                    node-version: 22.12
+
+            -   name: Install Dependencies
+                run: npm install
+
+            # -   name: Run Tests
+            #     run: npm test
+                
+            -   name: Build
+                run: npm run build
+
+            -   name: Deploy to Render
+                env:
+                    RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+                    RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+                run: |
+                    curl -X POST \
+                    -H "Authorization: Bearer $RENDER_API_KEY" \
+                    -d '{}' \
+                    $RENDER_DEPLOY_HOOK

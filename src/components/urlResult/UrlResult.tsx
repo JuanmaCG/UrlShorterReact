@@ -1,14 +1,15 @@
+import { ShortenResponse } from '../../types/shortenResponse';
 import { QrButton } from '../qrButton/QrButton';
 import styles from './UrlResult.module.css';
 
 interface UrlResultProps {
-  shortedUrl: string;
+    shortenData: ShortenResponse
 }
 
-export const UrlResult = ({ shortedUrl }: UrlResultProps) => {
+export const UrlResult = ({ shortenData }: UrlResultProps) => {
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(shortedUrl);
+            await navigator.clipboard.writeText(shortenData.aliasCompleteUrl ?? shortenData.shortedCompleteUrl);
         alert('URL copied to clipboard!');
         } catch (err) {
             console.error('Failed to copy:', err);
@@ -19,25 +20,25 @@ export const UrlResult = ({ shortedUrl }: UrlResultProps) => {
         <div className={styles.formGroup}>
             <input
                 type="text"
-                value={shortedUrl}
+                value={shortenData.aliasCompleteUrl ?? shortenData.shortedCompleteUrl}
                 readOnly
                 className={styles.resultInput}
             />
             <div className={styles.buttonGroup}>
                 <button 
-                type="button" 
-                className={styles.actionButton}
-                onClick={handleCopy}
+                    type="button" 
+                    className={styles.actionButton}
+                    onClick={handleCopy}
                 >
-                Copy
+                    Copy
                 </button>
-                <QrButton url={shortedUrl} />
+                <QrButton url={shortenData.alias ?? shortenData.shortedUrl} token={shortenData.token} />
                 <button 
-                type="button" 
-                className={styles.actionButton}
-                onClick={() => window.open(shortedUrl, '_blank')}
+                    type="button" 
+                    className={styles.actionButton}
+                    onClick={() => window.open(shortenData.aliasCompleteUrl ?? shortenData.shortedCompleteUrl, '_blank')}
                 >
-                Visit
+                    Visit
                 </button>
             </div>
         </div>

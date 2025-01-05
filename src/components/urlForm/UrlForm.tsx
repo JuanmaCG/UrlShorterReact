@@ -4,11 +4,12 @@ import { InputError } from '../inputError/InputError';
 import { UrlResult } from '../urlResult/UrlResult';
 import { LoadingSpinner } from '../loadingSpinner/LoadingSpinner';
 import styles from './UrlForm.module.css';
+import { ApiResult } from '../../types/apiResult';
 
 export const UrlForm = () => {
   const [url, setUrl] = useState('');
+  const [data, setData] = useState<ApiResult['data'] | undefined>();
   const [alias, setAlias] = useState('');
-  const [shortedUrl, setShortedUrl] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ export const UrlForm = () => {
   const resetForm = () => {
     setUrl('');
     setAlias('');
-    setShortedUrl('');
+    setData(undefined);
     setIsSubmitted(false);
     setError(null);
   };
@@ -27,7 +28,7 @@ export const UrlForm = () => {
     setIsLoading(true);
     
     try {
-      const result = await shortenUrl(url, alias);
+      const result: ApiResult = await shortenUrl(url, alias);
       
       if (result.error) {
         setError(result.error.message);
@@ -35,7 +36,8 @@ export const UrlForm = () => {
       }
 
       if (result.data) {
-        setShortedUrl(result.data);
+        setData(result.data);
+        setAlias(result.data.alias);
         setIsSubmitted(true);
       }
     } finally {
@@ -61,7 +63,7 @@ export const UrlForm = () => {
           <div className={styles.formGroup}>
             <input
               type="text"
-              value={alias}
+              value={data?.alias || alias}
               onChange={(e) => setAlias(e.target.value)}
               placeholder="Enter alias (optional)"
               className={error ? styles.inputError : ''}
@@ -69,9 +71,9 @@ export const UrlForm = () => {
           </div>
         )}
         {error && <InputError message={error} />}
-        {isSubmitted ? (
+        {isSubmitted && data ? (
           <>
-            <UrlResult shortedUrl={shortedUrl} />
+            <UrlResult shortenData={data} />
             <button 
               type="button" 
               className={styles.newUrlButton}
