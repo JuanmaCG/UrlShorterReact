@@ -6,6 +6,7 @@
   --input-bg-light: rgba(255, 255, 255, 0.95);
   --text-light: #2c3e50;
   --text-dark: #000000;
+  --text-title-dark: #c0cad3;
   --error-text-light: #ff0000;
   --input-text-light: #2c3e50;
   --shadow-light: rgba(0, 0, 0, 0.1);
@@ -22,6 +23,7 @@
   --form-bg: var(--form-bg-dark);
   --input-bg: var(--input-bg-light);
   --text-color: var(--text-dark);
+  --text-title: var(--text-title-dark);
   --shadow-color: var(--shadow-dark);
   --input-text-color: var(--text-dark);
   --error-text: var(--accent-color);
