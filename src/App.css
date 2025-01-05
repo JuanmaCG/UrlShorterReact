@@ -23,7 +23,7 @@
   --input-bg: var(--input-bg-light);
   --text-color: var(--text-dark);
   --shadow-color: var(--shadow-dark);
-  --input-text-color: var(--input-text-dark);
+  --input-text-color: var(--text-dark);
   --error-text: var(--accent-color);
 }
 
