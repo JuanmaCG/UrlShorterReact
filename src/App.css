@@ -34,6 +34,7 @@
   --form-bg: var(--form-bg-light);
   --input-bg: var(--input-bg-light);
   --text-color: var(--text-light);
+  --text-title: var(--text-light);
   --shadow-color: var(--shadow-light);
   --input-text-color: var(--input-text-light);
   --error-text: var(--error-text-light);
